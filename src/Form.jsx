@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Form = ({addTodo}) => {
     const [newTodo, setNewTodo] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (newTodo === '') return;
         addTodo(newTodo);
         setNewTodo('');
-        // pre-select:
+        // pre-select after reload:
         window.onsubmit = document.getElementById('newTodo').select();
     }
 

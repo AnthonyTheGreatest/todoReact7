@@ -3,7 +3,16 @@ import Form from './Form'
 import List from './List'
 
 const App = () => {
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
+
+  const [todos, setTodos] = useState(() => {
+      const localValue = localStorage.getItem('ITEMS');
+      return localValue === null ? [] : JSON.parse(localValue);
+  })
+
+  useEffect(() => {
+      localStorage.setItem('ITEMS', JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = text => {
     setTodos(prev => {
